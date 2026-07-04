@@ -1,0 +1,176 @@
+@import "./assets/css/variables.css";
+
+/* ============ Base ============ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-white);
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  color: var(--color-navy);
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+h1 { font-size: 48px; }
+h2 { font-size: 32px; }
+h3 { font-size: 24px; }
+h4 { font-size: 18px; }
+
+p { margin: 0 0 16px; }
+
+img { max-width: 100%; }
+
+:focus-visible {
+  outline: 3px solid var(--color-ocean);
+  outline-offset: 2px;
+}
+
+/* ============ Buttons — exactly two variants ============ */
+.btn-resort {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* Primary: gold gradient, navy text (max one per section) */
+.btn-resort--primary {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-deep));
+  color: var(--color-navy);
+}
+
+.btn-resort--primary:hover,
+.btn-resort--primary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: var(--color-navy);
+}
+
+/* Secondary: outline */
+.btn-resort--secondary {
+  background: transparent;
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+}
+
+.btn-resort--secondary:hover,
+.btn-resort--secondary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-navy);
+}
+
+.btn-resort--secondary.on-dark {
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+.btn-resort--secondary.on-dark:hover,
+.btn-resort--secondary.on-dark:focus-visible {
+  color: var(--color-white);
+}
+
+.btn-resort:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ============ Cards ============ */
+.surface-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.hover-lift {
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============ Sections ============ */
+.section { padding: 96px 0; }
+.section--beige { background: var(--color-beige); }
+.section--navy { background: var(--color-navy); }
+
+/* ============ Small shared pieces ============ */
+.tag {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--color-beige);
+  color: var(--color-navy);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--color-gold-deep);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.text-muted-soft { color: var(--color-text-muted); }
+
+/* ============ Forms (Bootstrap accent overrides) ============ */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-ocean);
+  box-shadow: 0 0 0 0.2rem rgba(29, 111, 165, 0.15);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--color-navy);
+}
+
+/* ============ Responsive type & spacing ============ */
+@media (max-width: 768px) {
+  h1 { font-size: 36px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 20px; }
+  .section { padding: 64px 0; }
+}
+
+@media (max-width: 425px) {
+  h1 { font-size: 32px; }
+}
+
+/* Respect users who prefer no motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

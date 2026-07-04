@@ -1,0 +1,39 @@
+<section class="hero" aria-label="Welcome to Wayanad Resorts">
+  <div class="hero__slides" aria-hidden="true">
+    <div class="hero__slide" *ngFor="let slide of slides; let i = index" [class.hero__slide--active]="i === currentIndex">
+      <img [ngSrc]="slide.src" [alt]="slide.alt" fill sizes="100vw" [priority]="i === 0" />
+    </div>
+  </div>
+
+  <div class="hero__panel">
+    <span class="eyebrow eyebrow--hero">Wayanad Resorts</span>
+    <h1>Where the Ocean Sets the Pace</h1>
+    <p>
+      A private beachfront escape of quiet luxury — ocean-view suites, fine
+      dining and mornings that begin with the tide.
+    </p>
+    <div class="hero__actions">
+      <a routerLink="/booking" class="btn-resort btn-resort--primary">Book Now</a>
+      <a routerLink="/rooms" class="btn-resort btn-resort--secondary on-dark">Explore Rooms</a>
+    </div>
+  </div>
+
+  <button type="button" class="hero__arrow hero__arrow--prev" (click)="previous()" aria-label="Previous slide">
+    <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+  </button>
+  <button type="button" class="hero__arrow hero__arrow--next" (click)="next()" aria-label="Next slide">
+    <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+  </button>
+
+  <div class="hero__dots">
+    <button
+      type="button"
+      *ngFor="let slide of slides; let i = index"
+      [class.hero__dot--active]="i === currentIndex"
+      class="hero__dot"
+      (click)="goTo(i)"
+      [attr.aria-label]="'Go to slide ' + (i + 1)"
+      [attr.aria-current]="i === currentIndex"
+    ></button>
+  </div>
+</section>

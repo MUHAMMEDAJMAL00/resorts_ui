@@ -1,0 +1,29 @@
+.stat {
+  text-align: center;
+}
+
+.stat i {
+  font-size: 26px;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+
+.stat__value {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.stat__label {
+  color: var(--color-beige);
+  margin: 4px 0 0;
+}
+
+@media (max-width: 768px) {
+  .stat__value {
+    font-size: 36px;
+  }
+}

@@ -1,0 +1,8 @@
+<span class="stars" role="img" [attr.aria-label]="'Rated ' + rating + ' out of 5 stars'">
+  <i
+    class="fa-solid fa-star"
+    *ngFor="let star of stars"
+    [class.filled]="star <= rating"
+    aria-hidden="true"
+  ></i>
+</span>

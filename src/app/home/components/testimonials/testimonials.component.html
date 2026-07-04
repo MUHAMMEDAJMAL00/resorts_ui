@@ -1,0 +1,53 @@
+<section class="section section--beige" aria-labelledby="testimonials-title">
+  <div class="container">
+    <app-section-header
+      eyebrow="Guest Stories"
+      title="What Our Guests Say"
+      subtitle="Unedited words from recent stays at Wayanad Resorts."
+    ></app-section-header>
+
+    <div
+      class="carousel"
+      (mouseenter)="pause()"
+      (mouseleave)="resume()"
+      (focusin)="pause()"
+      (focusout)="resume()"
+    >
+      <div class="carousel__viewport">
+        <div class="carousel__track" [style.transform]="'translateX(-' + activeIndex * 100 + '%)'">
+          <div class="carousel__slide" *ngFor="let testimonial of testimonials">
+            <figure class="surface-card testimonial">
+              <span class="testimonial__avatar" aria-hidden="true">{{ testimonial.initials }}</span>
+              <app-star-rating [rating]="testimonial.rating"></app-star-rating>
+              <blockquote>“{{ testimonial.quote }}”</blockquote>
+              <figcaption>
+                <strong>{{ testimonial.name }}</strong>
+                <span class="text-muted-soft">{{ testimonial.location }}</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel__controls">
+        <button type="button" class="carousel__arrow" (click)="previous()" aria-label="Previous testimonial">
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <div class="carousel__dots">
+          <button
+            type="button"
+            class="carousel__dot"
+            *ngFor="let testimonial of testimonials; let i = index"
+            [class.carousel__dot--active]="i === activeIndex"
+            (click)="goTo(i)"
+            [attr.aria-label]="'Show testimonial ' + (i + 1)"
+            [attr.aria-current]="i === activeIndex"
+          ></button>
+        </div>
+        <button type="button" class="carousel__arrow" (click)="next()" aria-label="Next testimonial">
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

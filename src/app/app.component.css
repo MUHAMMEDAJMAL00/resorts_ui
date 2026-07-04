@@ -1,0 +1,22 @@
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  z-index: 2000;
+  padding: 10px 20px;
+  background: var(--color-navy);
+  color: var(--color-white);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  text-decoration: none;
+  transition: transform var(--transition);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(48px);
+}
+
+main {
+  display: block;
+  min-height: 60vh;
+  outline: none;
+}

@@ -1,0 +1,43 @@
+.about-preview__image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-list {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+}
+
+.feature-list li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* One consistent icon size and color (gold) across all feature items */
+.feature-list i {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--color-gold-deep);
+  background: var(--color-beige);
+  border-radius: 50%;
+}
+
+.feature-list h4 {
+  margin-bottom: 2px;
+}
+
+.feature-list p {
+  margin: 0;
+  font-size: 15px;
+}

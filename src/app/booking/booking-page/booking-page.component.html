@@ -1,0 +1,190 @@
+<app-page-banner
+  eyebrow="Reservations"
+  title="Book Your Stay"
+  subtitle="Choose your dates and room — we’ll hold your reservation while our team confirms."
+></app-page-banner>
+
+<section class="section" aria-label="Booking form">
+  <div class="container">
+    <!-- Success state -->
+    <div class="surface-card booking-success" *ngIf="confirmation; else bookingForm" role="status">
+      <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+      <h2>Request Received</h2>
+      <p>
+        Thank you — your booking request is in. Your reference is
+        <strong>{{ confirmation.reference }}</strong> and its current status is
+        <span class="tag">Pending confirmation</span>
+      </p>
+      <p class="text-muted-soft">
+        Our reservations team will email you within 24 hours to confirm availability
+        and arrange payment. No charge has been made yet.
+      </p>
+      <button type="button" class="btn-resort btn-resort--secondary" (click)="startNewBooking()">
+        Make Another Booking
+      </button>
+    </div>
+
+    <ng-template #bookingForm>
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <form class="surface-card booking-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+            <h2 class="h3">Reservation Details</h2>
+
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label" for="roomId">Room or Suite</label>
+                <select
+                  id="roomId"
+                  class="form-select"
+                  formControlName="roomId"
+                  [class.is-invalid]="hasError('roomId')"
+                >
+                  <option value="" disabled>Select a room…</option>
+                  <option *ngFor="let room of rooms" [value]="room.id">
+                    {{ room.name }} — ${{ room.pricePerNight }}/night
+                  </option>
+                </select>
+                <div class="invalid-feedback">Please choose a room.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="checkIn">Check-in</label>
+                <input
+                  type="date"
+                  id="checkIn"
+                  class="form-control"
+                  formControlName="checkIn"
+                  [min]="today"
+                  [class.is-invalid]="hasError('checkIn')"
+                />
+                <div class="invalid-feedback">Please pick a check-in date.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="checkOut">Check-out</label>
+                <input
+                  type="date"
+                  id="checkOut"
+                  class="form-control"
+                  formControlName="checkOut"
+                  [min]="form.getRawValue().checkIn || today"
+                  [class.is-invalid]="hasError('checkOut') || hasDateRangeError"
+                />
+                <div class="invalid-feedback" *ngIf="hasError('checkOut'); else rangeMsg">
+                  Please pick a check-out date.
+                </div>
+                <ng-template #rangeMsg>
+                  <div class="invalid-feedback">Check-out must be after check-in.</div>
+                </ng-template>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="guests">Guests</label>
+                <select
+                  id="guests"
+                  class="form-select"
+                  formControlName="guests"
+                  [class.is-invalid]="hasError('guests')"
+                >
+                  <option *ngFor="let count of guestOptions" [ngValue]="count">
+                    {{ count }} {{ count === 1 ? 'guest' : 'guests' }}
+                  </option>
+                </select>
+                <div class="invalid-feedback">Please choose the number of guests.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="fullName">Full Name</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  class="form-control"
+                  formControlName="fullName"
+                  autocomplete="name"
+                  [class.is-invalid]="hasError('fullName')"
+                />
+                <div class="invalid-feedback">Please enter your full name.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  formControlName="email"
+                  autocomplete="email"
+                  [class.is-invalid]="hasError('email')"
+                />
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label" for="phone">Phone</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-control"
+                  formControlName="phone"
+                  autocomplete="tel"
+                  [class.is-invalid]="hasError('phone')"
+                />
+                <div class="invalid-feedback">Please enter a valid phone number.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" for="specialRequests">Special Requests <span class="text-muted-soft">(optional)</span></label>
+                <textarea
+                  id="specialRequests"
+                  class="form-control"
+                  formControlName="specialRequests"
+                  rows="3"
+                ></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-resort btn-resort--primary booking-form__submit" [disabled]="submitting">
+              <i class="fa-solid fa-spinner fa-spin" *ngIf="submitting" aria-hidden="true"></i>
+              {{ submitting ? 'Sending…' : 'Request Booking' }}
+            </button>
+          </form>
+        </div>
+
+        <div class="col-lg-5">
+          <aside class="surface-card booking-summary" aria-label="Booking summary">
+            <h2 class="h3">Your Stay</h2>
+            <dl>
+              <div class="booking-summary__row">
+                <dt>Room</dt>
+                <dd>{{ selectedRoom?.name || 'Not selected' }}</dd>
+              </div>
+              <div class="booking-summary__row">
+                <dt>Rate</dt>
+                <dd>
+                  <ng-container *ngIf="selectedRoom as room; else dash">${{ room.pricePerNight }} / night</ng-container>
+                </dd>
+              </div>
+              <div class="booking-summary__row">
+                <dt>Nights</dt>
+                <dd>
+                  <ng-container *ngIf="nights > 0; else dash">{{ nights }}</ng-container>
+                </dd>
+              </div>
+              <div class="booking-summary__row booking-summary__row--total">
+                <dt>Estimated Total</dt>
+                <dd>
+                  <ng-container *ngIf="total > 0; else dash">${{ total }}</ng-container>
+                </dd>
+              </div>
+            </dl>
+            <ng-template #dash><span class="text-muted-soft">—</span></ng-template>
+            <p class="text-muted-soft booking-summary__note">
+              Rates include breakfast and taxes. Nothing is charged until our team
+              confirms your reservation.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</section>

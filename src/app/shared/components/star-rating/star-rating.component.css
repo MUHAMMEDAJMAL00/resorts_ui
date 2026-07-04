@@ -1,0 +1,10 @@
+.stars {
+  display: inline-flex;
+  gap: 4px;
+  font-size: 14px;
+  color: #d8d3c8;
+}
+
+.stars .filled {
+  color: var(--color-gold);
+}

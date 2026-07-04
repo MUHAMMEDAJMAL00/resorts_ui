@@ -1,0 +1,17 @@
+<app-page-banner
+  eyebrow="Moments"
+  title="Gallery"
+  subtitle="Scenes from around the resort — pools, beach, gardens and golden hours."
+></app-page-banner>
+
+<section class="section" aria-label="Resort photo gallery">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let image of images">
+        <figure class="gallery-item">
+          <img [ngSrc]="image.src" [alt]="image.alt" width="800" height="600" />
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

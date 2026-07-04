@@ -1,0 +1,30 @@
+.story-image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.value-card {
+  height: 100%;
+  padding: 36px 28px;
+  text-align: center;
+}
+
+.value-card i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: var(--color-gold-deep);
+  background: var(--color-beige);
+  border-radius: 50%;
+}
+
+.value-card p {
+  margin: 0;
+  font-size: 15px;
+}

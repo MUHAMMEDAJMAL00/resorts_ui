@@ -1,0 +1,38 @@
+<header class="site-header" [class.site-header--solid]="isScrolled || isMenuOpen">
+  <nav class="container site-header__inner" aria-label="Main navigation">
+    <a routerLink="/" class="brand" (click)="closeMenu()" aria-label="Wayanad Resorts — home">
+      <i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i>
+      <span>Wayanad Resorts</span>
+    </a>
+
+    <ul class="nav-links" id="primary-menu" [class.nav-links--open]="isMenuOpen">
+      <li *ngFor="let link of navLinks">
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+          (click)="closeMenu()"
+          >{{ link.label }}</a
+        >
+      </li>
+      <li class="nav-links__cta">
+        <a routerLink="/booking" class="btn-resort btn-resort--primary" (click)="closeMenu()">Book Now</a>
+      </li>
+    </ul>
+
+    <a routerLink="/booking" class="btn-resort btn-resort--primary site-header__cta">Book Now</a>
+
+    <button
+      type="button"
+      class="menu-toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-controls="primary-menu"
+      aria-label="Toggle navigation menu"
+    >
+      <i class="fa-solid" [class.fa-bars]="!isMenuOpen" [class.fa-xmark]="isMenuOpen" aria-hidden="true"></i>
+    </button>
+  </nav>
+</header>
+
+<div class="menu-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()" aria-hidden="true"></div>

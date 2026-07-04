@@ -1,0 +1,132 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__slides {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.hero__slide--active {
+  opacity: 1;
+}
+
+.hero__slide img {
+  object-fit: cover;
+}
+
+/* Dark overlay for text contrast */
+.hero__slides::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(11, 37, 69, 0.55) 0%, rgba(11, 37, 69, 0.35) 60%, rgba(11, 37, 69, 0.55) 100%);
+}
+
+/* Glass content panel (the second and last allowed use of glassmorphism) */
+.hero__panel {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 24px;
+  padding: 48px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.hero__panel h1 {
+  color: var(--color-white);
+}
+
+.hero__panel p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  max-width: 480px;
+  margin: 0 auto 28px;
+}
+
+.eyebrow--hero {
+  color: var(--color-gold);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: rgba(11, 37, 69, 0.3);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.hero__arrow:hover {
+  opacity: 0.75;
+}
+
+.hero__arrow--prev { left: 24px; }
+.hero__arrow--next { right: 24px; }
+
+.hero__dots {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 10px;
+}
+
+.hero__dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.hero__dot--active {
+  background: var(--color-gold);
+  transform: scale(1.25);
+}
+
+@media (max-width: 768px) {
+  .hero__panel {
+    padding: 32px 24px;
+  }
+
+  .hero__arrow {
+    display: none;
+  }
+}

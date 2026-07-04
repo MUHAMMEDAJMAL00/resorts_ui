@@ -1,0 +1,106 @@
+.carousel {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.carousel__viewport {
+  overflow: hidden;
+}
+
+.carousel__track {
+  display: flex;
+  transition: transform 300ms ease;
+}
+
+.carousel__slide {
+  flex: 0 0 100%;
+  padding: 8px;
+}
+
+.testimonial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.testimonial__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-navy);
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 22px;
+}
+
+.testimonial blockquote {
+  margin: 0;
+  font-size: 18px;
+  color: var(--color-text);
+  max-width: 560px;
+}
+
+.testimonial figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial figcaption strong {
+  color: var(--color-navy);
+}
+
+.carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.carousel__arrow {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--color-navy);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-navy);
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.carousel__arrow:hover {
+  opacity: 0.7;
+}
+
+.carousel__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.carousel__dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #cfc8b8;
+  cursor: pointer;
+}
+
+.carousel__dot--active {
+  background: var(--color-gold-deep);
+}
+
+@media (max-width: 425px) {
+  .testimonial {
+    padding: 32px 20px;
+  }
+}

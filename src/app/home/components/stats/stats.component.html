@@ -1,0 +1,13 @@
+<section class="section section--navy" aria-label="Resort highlights in numbers">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-lg-3" *ngFor="let stat of stats; let i = index">
+        <div class="stat">
+          <i [class]="stat.icon" aria-hidden="true"></i>
+          <p class="stat__value">{{ displayValues[i] }}{{ stat.suffix }}</p>
+          <p class="stat__label">{{ stat.label }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

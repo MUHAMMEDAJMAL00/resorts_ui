@@ -1,0 +1,128 @@
+.site-footer {
+  background: var(--color-navy);
+  color: var(--color-beige);
+  padding: 72px 0 24px;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+.footer-brand i {
+  color: var(--color-gold);
+}
+
+.footer-muted {
+  color: rgba(245, 240, 230, 0.75);
+  max-width: 320px;
+}
+
+.footer-title {
+  color: var(--color-white);
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.footer-links,
+.footer-social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a,
+.footer-contact a {
+  color: rgba(245, 240, 230, 0.75);
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  color: var(--color-gold);
+}
+
+.footer-contact {
+  font-style: normal;
+}
+
+.footer-contact p {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 10px;
+  color: rgba(245, 240, 230, 0.75);
+}
+
+.footer-contact i {
+  color: var(--color-gold);
+  width: 16px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 240, 230, 0.3);
+  color: var(--color-beige);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.footer-social a:hover {
+  transform: translateY(-2px);
+  color: var(--color-gold);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(245, 240, 230, 0.15);
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: rgba(245, 240, 230, 0.6);
+  font-size: 14px;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid rgba(245, 240, 230, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--color-beige);
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.back-to-top:hover {
+  transform: translateY(-2px);
+  color: var(--color-gold);
+}

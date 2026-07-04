@@ -1,0 +1,25 @@
+<article class="surface-card hover-lift room-card">
+  <div class="room-card__media">
+    <img [ngSrc]="room.image" [alt]="room.imageAlt" width="800" height="600" />
+  </div>
+  <div class="room-card__body">
+    <span class="eyebrow">{{ room.type }}</span>
+    <h3>{{ room.name }}</h3>
+    <p class="text-muted-soft">{{ room.description }}</p>
+    <ul class="room-card__features" aria-label="Room features">
+      <li class="tag" *ngFor="let feature of room.features">{{ feature }}</li>
+    </ul>
+    <div class="room-card__footer">
+      <p class="room-card__price">
+        <strong>${{ room.pricePerNight }}</strong>
+        <span class="text-muted-soft">/ night</span>
+      </p>
+      <a
+        class="btn-resort btn-resort--secondary"
+        [routerLink]="['/booking']"
+        [queryParams]="{ room: room.id }"
+        >Book Now</a
+      >
+    </div>
+  </div>
+</article>

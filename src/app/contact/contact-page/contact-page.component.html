@@ -1,0 +1,110 @@
+<app-page-banner
+  eyebrow="Get in Touch"
+  title="Contact Us"
+  subtitle="Questions about your stay, events or the resort — we reply within a day."
+></app-page-banner>
+
+<section class="section" aria-label="Contact form and details">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <form class="surface-card contact-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+          <h2 class="h3">Send a Message</h2>
+
+          <div class="alert-success-soft" *ngIf="messageSent" role="status">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            Thank you — your message has been sent. We’ll get back to you within 24 hours.
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                formControlName="name"
+                autocomplete="name"
+                [class.is-invalid]="hasError('name')"
+              />
+              <div class="invalid-feedback">Please enter your name.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label" for="phone">Phone</label>
+              <input
+                type="tel"
+                id="phone"
+                class="form-control"
+                formControlName="phone"
+                autocomplete="tel"
+                [class.is-invalid]="hasError('phone')"
+              />
+              <div class="invalid-feedback">Please enter a valid phone number.</div>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label" for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                autocomplete="email"
+                [class.is-invalid]="hasError('email')"
+              />
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+
+            <div class="col-12">
+              <label class="form-label" for="message">Message</label>
+              <textarea
+                id="message"
+                class="form-control"
+                formControlName="message"
+                rows="5"
+                [class.is-invalid]="hasError('message')"
+              ></textarea>
+              <div class="invalid-feedback">Please write a message of at least 10 characters.</div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-resort btn-resort--primary contact-form__submit">Send Message</button>
+        </form>
+      </div>
+
+      <div class="col-lg-5">
+        <aside class="contact-side" aria-label="Contact details">
+          <div class="surface-card contact-details">
+            <h2 class="h3">Reach Us Directly</h2>
+            <ul>
+              <li>
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>Vythiri Road, Wayanad, Kerala</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+              </li>
+              <li>
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:stay@wayanadresorts.example">stay&#64;wayanadresorts.example</a>
+              </li>
+              <li>
+                <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                <span>Front desk: 24 hours, every day</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Placeholder: swap for a real Google Maps iframe embed when available -->
+          <div class="surface-card map-placeholder" role="img" aria-label="Map placeholder showing the resort location in Wayanad, Kerala">
+            <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+            <p>Google Maps embed</p>
+            <p class="text-muted-soft">Vythiri Road, Wayanad, Kerala</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>

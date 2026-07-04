@@ -1,0 +1,33 @@
+/* ============================================================
+   Wayanad Resorts — Global Design Tokens
+   Single source of truth: colors, shadows, radii, fonts, motion.
+   Never hardcode these values inside components.
+   ============================================================ */
+:root {
+  /* Colors */
+  --color-navy: #0b2545;
+  --color-ocean: #1d6fa5;
+  --color-gold: #c9a24b;
+  --color-gold-deep: #a8823a;
+  --color-beige: #f5f0e6;
+  --color-white: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
+
+  /* Shadow scale — the only three shadows allowed in the app */
+  --shadow-sm: 0 2px 8px rgba(11, 37, 69, 0.08);
+  --shadow-md: 0 8px 24px rgba(11, 37, 69, 0.14);
+  --shadow-lg: 0 16px 48px rgba(11, 37, 69, 0.2);
+
+  /* Border-radius scale */
+  --radius-sm: 8px;   /* buttons, inputs */
+  --radius-md: 16px;  /* cards */
+  --radius-lg: 24px;  /* large panels / hero content box */
+
+  /* Typography */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+
+  /* Motion */
+  --transition: 250ms ease;
+}
