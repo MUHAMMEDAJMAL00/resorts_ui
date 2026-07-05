@@ -1,7 +1,26 @@
 .page-banner {
+  position: relative;
+  overflow: hidden;
   padding: 160px 0 72px;
   background: linear-gradient(150deg, var(--color-navy) 0%, var(--color-ocean) 100%);
   text-align: center;
+}
+
+.page-banner__image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Keep the brand gradient, let the photo show through underneath */
+.page-banner__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(150deg, rgba(11, 37, 69, 0.88) 0%, rgba(29, 111, 165, 0.7) 100%);
+}
+
+.page-banner .container {
+  position: relative;
+  z-index: 1;
 }
 
 .page-banner h1 {

@@ -103,6 +103,23 @@
 
 /* ============ Mobile: slide-in panel ============ */
 @media (max-width: 991px) {
+  /* backdrop-filter makes the header the containing block for fixed
+     descendants, which breaks the drawer — use a plain solid header
+     on mobile instead of glass. */
+  .site-header--solid {
+    background: var(--color-white);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .site-header__inner {
+    min-height: 64px;
+  }
+
+  .brand {
+    font-size: 20px;
+  }
+
   .site-header__cta {
     display: none;
   }
@@ -110,6 +127,8 @@
   .menu-toggle {
     display: inline-flex;
     margin-left: auto;
+    position: relative;
+    z-index: 1002;
   }
 
   .nav-links {
@@ -119,13 +138,14 @@
     bottom: 0;
     z-index: 1001;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: stretch;
+    gap: 0;
     width: min(320px, 85vw);
     margin: 0;
-    padding: 100px 32px 32px;
+    padding: 88px 28px 32px;
     background: var(--color-white);
     box-shadow: var(--shadow-lg);
+    overflow-y: auto;
     /* Single fade + slide transition */
     transform: translateX(100%);
     opacity: 0;
@@ -139,20 +159,38 @@
     visibility: visible;
   }
 
+  .nav-links li:not(.nav-links__cta) {
+    border-bottom: 1px solid var(--color-beige);
+  }
+
   .nav-links a:not(.btn-resort) {
     color: var(--color-navy);
-    font-size: 18px;
+    font-size: 17px;
     display: block;
-    padding: 8px 0;
+    padding: 14px 4px;
+    border-bottom: none;
+  }
+
+  .nav-links a.active:not(.btn-resort) {
+    color: var(--color-gold-deep);
+    font-weight: 600;
   }
 
   .nav-links__cta {
     display: block;
-    margin-top: 16px;
+    margin-top: 24px;
   }
 
-  .menu-toggle {
-    position: relative;
-    z-index: 1002;
+  .nav-links__cta .btn-resort {
+    width: 100%;
   }
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.menu-backdrop {
+  animation: backdrop-in var(--transition);
 }

@@ -1,6 +1,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh; /* stable height on mobile browsers with dynamic URL bars */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,13 +28,13 @@
   object-fit: cover;
 }
 
-/* Dark overlay for text contrast */
+/* Dark overlay for text contrast — warm-tinted so golden-hour slides keep their glow */
 .hero__slides::after {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(180deg, rgba(11, 37, 69, 0.55) 0%, rgba(11, 37, 69, 0.35) 60%, rgba(11, 37, 69, 0.55) 100%);
+  background: linear-gradient(180deg, rgba(46, 26, 16, 0.45) 0%, rgba(46, 26, 16, 0.2) 55%, rgba(46, 26, 16, 0.5) 100%);
 }
 
 /* Glass content panel (the second and last allowed use of glassmorphism) */
@@ -63,7 +64,7 @@
 }
 
 .eyebrow--hero {
-  color: var(--color-gold);
+  color: var(--color-navy);
 }
 
 .hero__actions {
@@ -128,5 +129,16 @@
 
   .hero__arrow {
     display: none;
+  }
+}
+
+@media (max-width: 425px) {
+  .hero__panel {
+    padding: 28px 20px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

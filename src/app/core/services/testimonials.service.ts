@@ -5,36 +5,44 @@ import { Testimonial } from '../models/testimonial.model';
 export class TestimonialsService {
   private readonly testimonials: Testimonial[] = [
     {
-      name: 'Sarah Mitchell',
-      location: 'London, UK',
-      initials: 'SM',
+      name: 'Anjali Menon',
+      location: 'Kozhikode, Kerala',
+      initials: 'AM',
       rating: 5,
       quote:
-        'The most restful week we have had in years. The staff remembered every detail, and the ocean-view suite was breathtaking.',
+        'Just a two-hour drive from home, yet it feels like another world. The staff remembered every little preference by the second morning.',
     },
     {
       name: 'Arun Nair',
-      location: 'Kochi, India',
+      location: 'Kochi, Kerala',
       initials: 'AN',
       rating: 5,
       quote:
-        'From airport pickup to checkout, everything felt effortless. The infinity pool at sunset is worth the trip alone.',
+        'From the pickup at Calicut airport to checkout, everything felt effortless. The infinity pool at sunset is worth the trip alone.',
     },
     {
-      name: 'Elena Rossi',
-      location: 'Milan, Italy',
-      initials: 'ER',
-      rating: 4,
-      quote:
-        'Beautiful grounds, exceptional dining and a spa that rivals the best in Europe. We are already planning our return.',
-    },
-    {
-      name: 'James Carter',
-      location: 'Sydney, Australia',
-      initials: 'JC',
+      name: 'Rakesh Gowda',
+      location: 'Bengaluru, Karnataka',
+      initials: 'RG',
       rating: 5,
       quote:
-        'We travelled with three kids and never once felt stretched. The kids club and lagoon pool made the holiday for them.',
+        'We drive up from Bengaluru every monsoon. Misty mornings, hot filter coffee on the balcony and total quiet — it never gets old.',
+    },
+    {
+      name: 'Thomas Kurian',
+      location: 'Thrissur, Kerala',
+      initials: 'TK',
+      rating: 4,
+      quote:
+        'Beautiful grounds and genuinely warm service. The Kerala sadhya at the restaurant was the best we have had outside home.',
+    },
+    {
+      name: 'Deepthi Shetty',
+      location: 'Mangaluru, Karnataka',
+      initials: 'DS',
+      rating: 5,
+      quote:
+        'A weekend away with three kids and we never once felt stretched. The kids club and the lagoon pool made the holiday for them.',
     },
   ];
 

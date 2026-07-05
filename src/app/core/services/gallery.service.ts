@@ -4,14 +4,26 @@ import { GalleryImage } from '../models/gallery-image.model';
 @Injectable({ providedIn: 'root' })
 export class GalleryService {
   private readonly images: GalleryImage[] = [
-    { src: 'assets/images/gallery/gallery-infinity-pool.svg', alt: 'Infinity pool merging with the ocean horizon at midday' },
-    { src: 'assets/images/gallery/gallery-private-beach.svg', alt: 'Loungers and parasols lined along the private white-sand beach' },
-    { src: 'assets/images/gallery/gallery-sunset-dining.svg', alt: 'Candle-lit dinner table set on the beach at sunset' },
-    { src: 'assets/images/gallery/gallery-spa-suite.svg', alt: 'Spa treatment suite with open shutters facing the sea' },
-    { src: 'assets/images/gallery/gallery-poolside-cabanas.svg', alt: 'Shaded poolside cabanas with white curtains and daybeds' },
-    { src: 'assets/images/gallery/gallery-ocean-villa.svg', alt: 'Beachfront villa exterior with private plunge pool at dusk' },
-    { src: 'assets/images/gallery/gallery-garden-walk.svg', alt: 'Stone pathway winding through tropical resort gardens' },
-    { src: 'assets/images/gallery/gallery-lobby-lounge.svg', alt: 'Open-air lobby lounge with rattan seating and sea view' },
+    {
+      src: 'assets/images/gallery/gallery-tea-plantation-road.jpg',
+      alt: 'Winding road curving through emerald tea plantations in the hills',
+    },
+    {
+      src: 'assets/images/gallery/gallery-grassland-pond.jpg',
+      alt: 'Rolling green grasslands surrounding a quiet mountain pond under a soft sky',
+    },
+    {
+      src: 'assets/images/gallery/gallery-heritage-village.jpg',
+      alt: 'Traditional thatched-roof heritage village terraced into a green hillside',
+    },
+    {
+      src: 'assets/images/gallery/gallery-ghat-hairpin.jpg',
+      alt: 'Aerial view of the forest ghat road hairpin bend glowing at dusk',
+    },
+    {
+      src: 'assets/images/gallery/gallery-forest-stream.jpg',
+      alt: 'Stream tumbling over rocks through dense rainforest below the hills',
+    },
   ];
 
   getImages(): GalleryImage[] {

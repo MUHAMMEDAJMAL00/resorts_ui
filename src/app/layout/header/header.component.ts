@@ -50,12 +50,19 @@ export class HeaderComponent {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+    this.updateBodyScroll();
   }
 
   closeMenu(): void {
     if (this.isMenuOpen) {
       this.isMenuOpen = false;
+      this.updateBodyScroll();
       this.cdr.markForCheck();
     }
+  }
+
+  /** Lock page scroll behind the open drawer. */
+  private updateBodyScroll(): void {
+    document.body.style.overflow = this.isMenuOpen ? 'hidden' : '';
   }
 }

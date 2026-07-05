@@ -1,0 +1,52 @@
+<article class="surface-card destination-card">
+  <div class="destination-card__slider">
+    <div
+      class="destination-card__track"
+      [style.transform]="'translateX(-' + activeIndex * 100 + '%)'"
+    >
+      <div class="destination-card__slide" *ngFor="let image of destination.images">
+        <img [ngSrc]="image.src" [alt]="image.alt" fill sizes="(max-width: 991px) 100vw, 50vw" />
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="destination-card__arrow destination-card__arrow--prev"
+      (click)="previous()"
+      [attr.aria-label]="'Previous photo of ' + destination.name"
+    >
+      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button
+      type="button"
+      class="destination-card__arrow destination-card__arrow--next"
+      (click)="next()"
+      [attr.aria-label]="'Next photo of ' + destination.name"
+    >
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+    </button>
+
+    <div class="destination-card__dots">
+      <button
+        type="button"
+        class="destination-card__dot"
+        *ngFor="let image of destination.images; let i = index"
+        [class.destination-card__dot--active]="i === activeIndex"
+        (click)="goTo(i)"
+        [attr.aria-label]="'Show photo ' + (i + 1) + ' of ' + destination.name"
+        [attr.aria-current]="i === activeIndex"
+      ></button>
+    </div>
+  </div>
+
+  <div class="destination-card__body">
+    <div class="destination-card__title">
+      <h3>{{ destination.name }}</h3>
+      <span class="tag">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        {{ destination.distance }}
+      </span>
+    </div>
+    <p class="text-muted-soft">{{ destination.description }}</p>
+  </div>
+</article>

@@ -1,4 +1,5 @@
 <app-page-banner
+  image="assets/images/banners/banner-heart-lake.jpg"
   eyebrow="Reservations"
   title="Book Your Stay"
   subtitle="Choose your dates and room — we’ll hold your reservation while our team confirms."
@@ -31,6 +32,9 @@
             <h2 class="h3">Reservation Details</h2>
 
             <div class="row g-3">
+              <div class="col-12">
+                <span class="form-section-label">Your Stay</span>
+              </div>
               <div class="col-12">
                 <label class="form-label" for="roomId">Room or Suite</label>
                 <select
@@ -93,6 +97,9 @@
                 <div class="invalid-feedback">Please choose the number of guests.</div>
               </div>
 
+              <div class="col-12 mt-4">
+                <span class="form-section-label">Guest Details</span>
+              </div>
               <div class="col-md-6">
                 <label class="form-label" for="fullName">Full Name</label>
                 <input
@@ -101,6 +108,7 @@
                   class="form-control"
                   formControlName="fullName"
                   autocomplete="name"
+                  placeholder="e.g. Anjali Menon"
                   [class.is-invalid]="hasError('fullName')"
                 />
                 <div class="invalid-feedback">Please enter your full name.</div>
@@ -114,6 +122,7 @@
                   class="form-control"
                   formControlName="email"
                   autocomplete="email"
+                  placeholder="you@example.com"
                   [class.is-invalid]="hasError('email')"
                 />
                 <div class="invalid-feedback">Please enter a valid email address.</div>
@@ -127,6 +136,7 @@
                   class="form-control"
                   formControlName="phone"
                   autocomplete="tel"
+                  placeholder="+91 98765 43210"
                   [class.is-invalid]="hasError('phone')"
                 />
                 <div class="invalid-feedback">Please enter a valid phone number.</div>
@@ -139,6 +149,7 @@
                   class="form-control"
                   formControlName="specialRequests"
                   rows="3"
+                  placeholder="Anything we should prepare for your stay — a crib, an early check-in, a celebration?"
                 ></textarea>
               </div>
             </div>

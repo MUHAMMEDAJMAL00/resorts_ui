@@ -5,10 +5,14 @@
   overflow: hidden;
 }
 
+.room-card__media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
 .room-card__media img {
-  display: block;
-  width: 100%;
-  height: auto;
+  object-fit: cover;
 }
 
 .room-card__body {

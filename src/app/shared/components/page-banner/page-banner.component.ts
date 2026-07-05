@@ -11,4 +11,6 @@ export class PageBannerComponent {
   @Input({ required: true }) title = '';
   @Input() eyebrow = '';
   @Input() subtitle = '';
+  /** Optional background photo, blended under the navy/ocean gradient. */
+  @Input() image = '';
 }

@@ -1,15 +1,36 @@
 <app-page-banner
+  image="assets/images/banners/banner-tea-plantation.jpg"
   eyebrow="Moments"
   title="Gallery"
-  subtitle="Scenes from around the resort — pools, beach, gardens and golden hours."
+  subtitle="The places worth leaving the pool for — Wayanad’s finest, minutes from your room."
 ></app-page-banner>
 
-<section class="section" aria-label="Resort photo gallery">
+<section class="section" aria-label="Tourist places around Wayanad">
   <div class="container">
+    <app-section-header
+      eyebrow="Explore Wayanad"
+      title="Places Worth the Trip"
+      subtitle="Every essential stop in the district — how far it is from us, and why it matters."
+    ></app-section-header>
     <div class="row g-4">
-      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let image of images">
+      <div class="col-lg-6" *ngFor="let destination of destinations">
+        <app-destination-card [destination]="destination"></app-destination-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--beige" aria-label="Resort photo gallery">
+  <div class="container">
+    <app-section-header
+      eyebrow="Around the Resort"
+      title="Moments From Our Grounds"
+      subtitle="Scenes guests captured in and around Wayanad Resorts."
+    ></app-section-header>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" *ngFor="let image of images">
         <figure class="gallery-item">
-          <img [ngSrc]="image.src" [alt]="image.alt" width="800" height="600" />
+          <img [ngSrc]="image.src" [alt]="image.alt" fill sizes="(max-width: 768px) 100vw, 33vw" />
         </figure>
       </div>
     </div>

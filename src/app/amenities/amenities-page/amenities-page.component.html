@@ -1,4 +1,5 @@
 <app-page-banner
+  image="assets/images/banners/banner-forest-stream.jpg"
   eyebrow="Resort Life"
   title="Amenities"
   subtitle="Everything you need for a stay where the hardest decision is pool or beach."
@@ -6,8 +7,8 @@
 
 <section class="section" aria-label="Resort amenities">
   <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-4 col-md-6" *ngFor="let amenity of amenities">
+    <div class="row g-3 g-lg-4">
+      <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let amenity of amenities">
         <article class="surface-card hover-lift amenity-card">
           <i [class]="amenity.icon" aria-hidden="true"></i>
           <h3>{{ amenity.title }}</h3>

@@ -1,4 +1,15 @@
-<section class="page-banner">
+<section class="page-banner" [class.page-banner--photo]="image">
+  <img
+    *ngIf="image"
+    [ngSrc]="image"
+    fill
+    priority
+    sizes="100vw"
+    alt=""
+    aria-hidden="true"
+    class="page-banner__image"
+  />
+  <div class="page-banner__scrim" *ngIf="image"></div>
   <div class="container">
     <span class="eyebrow eyebrow--banner" *ngIf="eyebrow">{{ eyebrow }}</span>
     <h1>{{ title }}</h1>

@@ -25,17 +25,22 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   currentIndex = 0;
 
   readonly slides: HeroSlide[] = [
+    // Photos downloaded from Unsplash into assets (no runtime hotlinking)
     {
-      src: 'assets/images/hero/hero-infinity-pool.svg',
-      alt: 'Infinity pool blending into the ocean under a clear morning sky',
+      src: 'assets/images/hero/hero-resort-pool-mountains.jpg',
+      alt: 'Turquoise resort pool surrounded by palm trees and cottages beneath green mountains',
     },
     {
-      src: 'assets/images/hero/hero-beach-sunset.svg',
-      alt: 'Golden sunset over the private beach with palm silhouettes',
+      src: 'assets/images/hero/hero-misty-valley-river.jpg',
+      alt: 'Misty river valley at sunrise with pine forests and towering cliffs',
     },
     {
-      src: 'assets/images/hero/hero-ocean-villa.svg',
-      alt: 'Beachfront villas lit warmly at dusk beside the shoreline',
+      src: 'assets/images/hero/hero-lodge-sunset-pool.jpg',
+      alt: 'Warmly lit wooden resort lodge with poolside loungers at sunset',
+    },
+    {
+      src: 'assets/images/hero/hero-heart-lake.jpg',
+      alt: 'Heart-shaped lake ringed by green grasslands at Chembra Peak, Wayanad',
     },
   ];
 

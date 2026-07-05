@@ -8,6 +8,7 @@
 
 .contact-form__submit {
   margin-top: 28px;
+  width: 100%;
 }
 
 .alert-success-soft {
