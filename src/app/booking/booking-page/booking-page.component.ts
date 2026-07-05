@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,6 +11,7 @@ import { BookingConfirmation, BookingRequest } from '../../core/models/booking.m
 import { Room } from '../../core/models/room.model';
 import { BookingService } from '../../core/services/booking.service';
 import { RoomsService } from '../../core/services/rooms.service';
+import { WhatsappService } from '../../core/services/whatsapp.service';
 
 const MS_PER_DAY = 86_400_000;
 
@@ -58,7 +59,9 @@ export class BookingPageComponent implements OnInit {
   constructor(
     private readonly roomsService: RoomsService,
     private readonly bookingService: BookingService,
+    private readonly whatsapp: WhatsappService,
     private readonly route: ActivatedRoute,
+    private readonly cdr: ChangeDetectorRef,
   ) {
     this.rooms = roomsService.getRooms();
   }
@@ -109,11 +112,36 @@ export class BookingPageComponent implements OnInit {
     }
 
     const request: BookingRequest = this.form.getRawValue();
+    // Open WhatsApp synchronously (before the simulated call) so the popup
+    // isn't blocked by the browser.
+    this.whatsapp.send(this.buildWhatsappMessage(request));
     this.submitting = true;
     this.bookingService.submitBooking(request).subscribe((confirmation) => {
       this.confirmation = confirmation;
       this.submitting = false;
+      // The delayed emission doesn't trigger change detection on its own
+      // (same quirk the hero slider works around), so schedule it explicitly.
+      this.cdr.markForCheck();
     });
+  }
+
+  private buildWhatsappMessage(request: BookingRequest): string {
+    const lines = [
+      '*Booking Enquiry — Wayanad Resorts*',
+      `Room: ${this.selectedRoom?.name ?? request.roomId}`,
+      `Check-in: ${request.checkIn} | Check-out: ${request.checkOut} (${this.nights} night${this.nights === 1 ? '' : 's'})`,
+      `Guests: ${request.guests}`,
+      `Name: ${request.fullName}`,
+      `Email: ${request.email}`,
+      `Phone: ${request.phone}`,
+    ];
+    if (request.specialRequests.trim()) {
+      lines.push(`Special requests: ${request.specialRequests.trim()}`);
+    }
+    if (this.total > 0) {
+      lines.push(`Estimated total: $${this.total}`);
+    }
+    return lines.join('\n');
   }
 
   startNewBooking(): void {

@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { WhatsappService } from '../../core/services/whatsapp.service';
+
 @Component({
   selector: 'app-contact-page',
   templateUrl: './contact-page.component.html',
@@ -9,6 +11,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class ContactPageComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly whatsapp = inject(WhatsappService);
 
   submitted = false;
   messageSent = false;
@@ -31,7 +34,17 @@ export class ContactPageComponent {
       this.form.markAllAsTouched();
       return;
     }
-    // No backend yet — acknowledge the message inline.
+    // No backend — hand the message off to WhatsApp (visitor presses Send there).
+    const { name, phone, email, message } = this.form.getRawValue();
+    this.whatsapp.send(
+      [
+        '*Contact Enquiry — Wayanad Resorts*',
+        `Name: ${name}`,
+        `Phone: ${phone}`,
+        `Email: ${email}`,
+        `Message: ${message}`,
+      ].join('\n'),
+    );
     this.messageSent = true;
     this.submitted = false;
     this.form.reset();
