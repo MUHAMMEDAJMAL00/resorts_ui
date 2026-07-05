@@ -44,3 +44,7 @@ Thumbs.db
 # Claude Code local settings
 .claude/
 test.md
+# Full-size photo originals (compressed copies live in src/assets)
+raw-images/
+
+new.md

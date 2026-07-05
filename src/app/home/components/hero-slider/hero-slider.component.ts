@@ -39,8 +39,8 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
       alt: 'Warmly lit wooden resort lodge with poolside loungers at sunset',
     },
     {
-      src: 'assets/images/hero/hero-heart-lake.jpg',
-      alt: 'Heart-shaped lake ringed by green grasslands at Chembra Peak, Wayanad',
+      src: 'assets/images/hero/hero-wayanad-hills.jpg',
+      alt: 'Velvety green rolling hills of the Western Ghats stretching to the horizon',
     },
   ];
 
