@@ -90,7 +90,9 @@
   font-size: 15px;
 }
 
-.nav-links__cta {
+.nav-links__cta,
+.nav-links__header,
+.nav-links__footer {
   display: none;
 }
 
@@ -412,6 +414,7 @@ body:has(.nav-links--open) {
   .nav-links__cta .btn-resort:hover i { transform: translateX(3px); }
 
   .nav-links__footer {
+    display: block;
     margin-top: auto;
     padding: 24px 24px 32px;
     text-align: center;
