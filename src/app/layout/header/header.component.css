@@ -4,8 +4,15 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: transparent;
-  transition: box-shadow var(--transition), opacity var(--transition);
+  background: rgba(255, 255, 255, 0);
+  -webkit-backdrop-filter: blur(0px);
+  backdrop-filter: blur(0px);
+  transition:
+    background-color 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    -webkit-backdrop-filter 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    backdrop-filter 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    opacity var(--transition);
 }
 
 /* Glassmorphism — this is the one place it is used (plus the hero panel) */
@@ -48,21 +55,31 @@
 }
 
 .nav-links a:not(.btn-resort) {
+  position: relative;
   color: var(--color-white);
   font-weight: 500;
   font-size: 15px;
   text-decoration: none;
   padding: 6px 2px;
-  border-bottom: 2px solid transparent;
-  transition: opacity var(--transition);
 }
 
-.nav-links a:not(.btn-resort):hover {
-  opacity: 0.75;
+/* Underline grows from the left on hover; stays full-width when active */
+.nav-links a:not(.btn-resort)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-.nav-links a.active {
-  border-bottom-color: var(--color-gold);
+.nav-links a:not(.btn-resort):hover::after,
+.nav-links a.active:not(.btn-resort)::after {
+  transform: scaleX(1);
 }
 
 /* Solid header: switch text to navy */
@@ -102,7 +119,60 @@
 }
 
 /* ============ Mobile: slide-in panel ============ */
+/* ============ Page-load intro: logo scales in, nav items drop in ============ */
+@media (prefers-reduced-motion: no-preference) {
+  /* "backwards" (not "both") so the finished animation releases the
+     transform — the magnetic hover sets inline transforms afterwards. */
+  .brand {
+    animation: header-brand-in 0.7s cubic-bezier(0.33, 1, 0.68, 1) 0.1s backwards;
+  }
+
+  @media (min-width: 992px) {
+    .nav-links li,
+    .site-header__cta {
+      animation: header-item-in 0.6s cubic-bezier(0.33, 1, 0.68, 1) backwards;
+    }
+
+    .nav-links li:nth-child(1) { animation-delay: 0.3s; }
+    .nav-links li:nth-child(2) { animation-delay: 0.37s; }
+    .nav-links li:nth-child(3) { animation-delay: 0.44s; }
+    .nav-links li:nth-child(4) { animation-delay: 0.51s; }
+    .nav-links li:nth-child(5) { animation-delay: 0.58s; }
+    .nav-links li:nth-child(6) { animation-delay: 0.65s; }
+    .nav-links li:nth-child(7) { animation-delay: 0.72s; }
+    .site-header__cta { animation-delay: 0.8s; }
+  }
+}
+
+@keyframes header-brand-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes header-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 991px) {
+  /* The intro underline/drop-in styles above are desktop-only; keep the
+     drawer links plain so the slide-in panel stays clean. */
+  .nav-links a:not(.btn-resort)::after {
+    display: none;
+  }
+
   /* backdrop-filter makes the header the containing block for fixed
      descendants, which breaks the drawer — use a plain solid header
      on mobile instead of glass. */

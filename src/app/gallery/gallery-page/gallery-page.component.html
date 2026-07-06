@@ -13,7 +13,13 @@
       subtitle="Every essential stop in the district — how far it is from us, and why it matters."
     ></app-section-header>
     <div class="row g-4">
-      <div class="col-lg-6" *ngFor="let destination of destinations">
+      <div
+        class="col-lg-6"
+        *ngFor="let destination of destinations; let i = index"
+        appReveal
+        [revealScale]="0.97"
+        [revealDelay]="(i % 2) * 0.12"
+      >
         <app-destination-card [destination]="destination"></app-destination-card>
       </div>
     </div>
@@ -28,8 +34,8 @@
       subtitle="Scenes guests captured in and around Wayanad Resorts."
     ></app-section-header>
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6" *ngFor="let image of images">
-        <figure class="gallery-item">
+      <div class="col-lg-4 col-md-6" *ngFor="let image of images; let i = index">
+        <figure class="gallery-item" appClipReveal clipFrom="bottom" [clipDelay]="(i % 3) * 0.12">
           <img [ngSrc]="image.src" [alt]="image.alt" fill sizes="(max-width: 768px) 100vw, 33vw" />
         </figure>
       </div>

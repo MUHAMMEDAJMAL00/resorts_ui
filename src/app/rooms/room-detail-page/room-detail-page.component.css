@@ -1,0 +1,102 @@
+.room-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: var(--color-navy);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.room-detail__back:hover {
+  color: var(--color-gold-deep);
+}
+
+.room-detail__main {
+  margin: 0 0 12px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--color-beige);
+}
+
+.room-detail__main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.room-detail__thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.room-detail__thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+  aspect-ratio: 16 / 10;
+  transition: border-color 0.3s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.3s;
+  opacity: 0.75;
+}
+
+.room-detail__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.room-detail__thumb:hover {
+  opacity: 1;
+}
+
+.room-detail__thumb--active {
+  border-color: var(--color-gold);
+  opacity: 1;
+}
+
+.room-detail__summary {
+  padding: 32px;
+  position: sticky;
+  top: 100px;
+}
+
+.room-detail__features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.room-detail__price {
+  margin-bottom: 20px;
+}
+
+.room-detail__price strong {
+  font-size: 28px;
+  color: var(--color-navy);
+}
+
+.room-detail__book {
+  width: 100%;
+}
+
+.room-detail__note {
+  margin: 14px 0 0;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .room-detail__summary {
+    position: static;
+    padding: 24px 20px;
+  }
+}

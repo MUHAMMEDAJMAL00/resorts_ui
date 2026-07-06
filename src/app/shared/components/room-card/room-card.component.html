@@ -1,10 +1,74 @@
 <article class="surface-card hover-lift room-card">
-  <div class="room-card__media">
-    <img [ngSrc]="room.image" [alt]="room.imageAlt" fill sizes="(max-width: 768px) 100vw, 33vw" />
+  <div
+    #media
+    class="room-card__media"
+    role="group"
+    aria-roledescription="carousel"
+    [attr.aria-label]="room.name + ' photos'"
+    tabindex="0"
+    (keydown.arrowLeft)="previous()"
+    (keydown.arrowRight)="next()"
+  >
+    <a
+      class="room-card__media-link"
+      [routerLink]="['/rooms', room.id]"
+      draggable="false"
+      (click)="onLinkClick($event)"
+      [attr.aria-label]="'View details of ' + room.name"
+    >
+      <div #track class="room-card__track">
+        <div class="room-card__slide" *ngFor="let image of room.images">
+          <img
+            [ngSrc]="image.src"
+            [alt]="image.alt"
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            draggable="false"
+          />
+        </div>
+      </div>
+    </a>
+
+    <button
+      type="button"
+      class="room-card__nav room-card__nav--prev"
+      *ngIf="!isFirst"
+      (click)="previous()"
+      aria-label="Previous photo"
+    >
+      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button
+      type="button"
+      class="room-card__nav room-card__nav--next"
+      *ngIf="!isLast"
+      (click)="next()"
+      aria-label="Next photo"
+    >
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+    </button>
+
+    <span class="room-card__counter" aria-hidden="true"
+      >{{ activeIndex + 1 }} / {{ room.images.length }}</span
+    >
+
+    <div class="room-card__dots" role="group" aria-label="Room photos">
+      <button
+        type="button"
+        class="room-card__dot"
+        *ngFor="let image of room.images; let i = index"
+        [class.room-card__dot--active]="i === activeIndex"
+        (click)="goTo(i)"
+        [attr.aria-label]="'Show photo ' + (i + 1) + ' of ' + room.images.length"
+        [attr.aria-current]="i === activeIndex"
+      ></button>
+    </div>
   </div>
   <div class="room-card__body">
     <span class="eyebrow">{{ room.type }}</span>
-    <h3>{{ room.name }}</h3>
+    <h3>
+      <a class="room-card__title-link" [routerLink]="['/rooms', room.id]">{{ room.name }}</a>
+    </h3>
     <p class="text-muted-soft">{{ room.description }}</p>
     <ul class="room-card__features" aria-label="Room features">
       <li class="tag" *ngFor="let feature of room.features">{{ feature }}</li>

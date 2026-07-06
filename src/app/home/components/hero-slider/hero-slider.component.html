@@ -1,7 +1,7 @@
 <section class="hero" aria-label="Welcome to Wayanad Resorts">
   <div class="hero__slides" aria-hidden="true">
     <div class="hero__slide" *ngFor="let slide of slides; let i = index" [class.hero__slide--active]="i === currentIndex">
-      <img [ngSrc]="slide.src" [alt]="slide.alt" fill sizes="100vw" [priority]="i === 0" />
+      <img [ngSrc]="slide.src" [alt]="slide.alt" fill sizes="100vw" priority />
     </div>
   </div>
 

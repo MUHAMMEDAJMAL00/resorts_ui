@@ -5,6 +5,24 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ============ Lenis smooth scrolling (recommended setup) ============ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -53,17 +71,17 @@ img { max-width: 100%; }
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-/* Primary: gold gradient, navy text (max one per section) */
+/* Primary: gold gradient, white text (max one per section) */
 .btn-resort--primary {
   background: linear-gradient(135deg, var(--color-gold), var(--color-gold-deep));
-  color: var(--color-navy);
+  color: var(--color-white);
 }
 
 .btn-resort--primary:hover,
 .btn-resort--primary:focus-visible {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  color: var(--color-navy);
+  color: var(--color-white);
 }
 
 /* Secondary: outline */
@@ -105,12 +123,24 @@ img { max-width: 100%; }
 }
 
 .hover-lift {
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition:
+    transform 0.3s cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 0.3s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .hover-lift:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow: var(--shadow-md);
+}
+
+/* Card icons tilt playfully when their card is hovered */
+.hover-lift i {
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.hover-lift:hover > i,
+.hover-lift:hover i:first-child {
+  transform: rotate(-8deg) scale(1.12);
 }
 
 /* ============ Sections ============ */
@@ -198,6 +228,22 @@ img { max-width: 100%; }
 
 @media (max-width: 425px) {
   h1 { font-size: 32px; }
+}
+
+/* ============ Micro-interactions ============ */
+/* Underline grows from the left on footer/inline text links */
+.footer-links a,
+.footer-contact a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 1px;
+  transition: background-size 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+  background-size: 100% 1px;
 }
 
 /* Respect users who prefer no motion */

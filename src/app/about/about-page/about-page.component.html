@@ -8,7 +8,7 @@
 <section class="section" aria-labelledby="story-title">
   <div class="container">
     <div class="row align-items-center g-4 g-lg-5">
-      <div class="col-lg-6">
+      <div class="col-lg-6" appReveal revealChildren="app-section-header, p" [revealStagger]="0.12">
         <app-section-header
           align="left"
           eyebrow="Since 2008"
@@ -34,6 +34,9 @@
           width="1600"
           height="953"
           class="story-image"
+          appClipReveal
+          clipFrom="right"
+          [appParallax]="5"
         />
       </div>
     </div>
@@ -47,7 +50,7 @@
       title="The Wayanad Resorts Way"
       subtitle="Three principles shape every stay."
     ></app-section-header>
-    <div class="row g-4">
+    <div class="row g-4" appReveal revealChildren=".value-card" [revealScale]="0.95" [revealStagger]="0.13">
       <div class="col-md-4" *ngFor="let value of values">
         <article class="surface-card hover-lift value-card">
           <i [class]="value.icon" aria-hidden="true"></i>

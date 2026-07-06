@@ -17,7 +17,7 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 300ms ease;
+  transition: opacity 400ms ease;
 }
 
 .hero__slide--active {
@@ -26,6 +26,19 @@
 
 .hero__slide img {
   object-fit: cover;
+}
+
+/* Slow continuous Ken Burns zoom on the visible slide */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__slide--active img {
+    animation: hero-kenburns 18s ease-out forwards;
+    will-change: transform;
+  }
+}
+
+@keyframes hero-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
 }
 
 /* Dark overlay for text contrast — warm-tinted so golden-hour slides keep their glow */
@@ -54,6 +67,20 @@
 
 .hero__panel h1 {
   color: var(--color-white);
+}
+
+/* Word masks for the intro reveal — each word rises out of its own clip */
+.hero__panel h1 .hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.hero__panel h1 .hero-word__inner {
+  display: inline-block;
+  will-change: transform;
 }
 
 .hero__panel p {

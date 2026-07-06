@@ -28,6 +28,20 @@
   margin-bottom: 8px;
 }
 
+/* Word masks for the entrance reveal — each word rises out of its own clip */
+.page-banner h1 .banner-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.page-banner h1 .banner-word__inner {
+  display: inline-block;
+  will-change: transform;
+}
+
 .page-banner p {
   color: var(--color-beige);
   font-size: 18px;

@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+
+import { MotionService } from '../../core/services/motion.service';
 
 interface FooterLink {
   label: string;
@@ -19,6 +21,8 @@ interface SocialLink {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
+  private readonly motion = inject(MotionService);
+
   readonly year = new Date().getFullYear();
 
   readonly quickLinks: FooterLink[] = [
@@ -38,6 +42,7 @@ export class FooterComponent {
   ];
 
   scrollToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Goes through Lenis when smooth scrolling is active, falls back otherwise.
+    this.motion.scrollTo(0);
   }
 }

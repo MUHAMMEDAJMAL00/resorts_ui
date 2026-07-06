@@ -1,0 +1,79 @@
+<ng-container *ngIf="room as r">
+  <app-page-banner
+    [image]="r.image"
+    [eyebrow]="r.type"
+    [title]="r.name"
+    [subtitle]="r.description"
+  ></app-page-banner>
+
+  <section class="section" aria-label="Room details and photos">
+    <div class="container">
+      <a routerLink="/rooms" class="room-detail__back">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        All Rooms &amp; Suites
+      </a>
+
+      <div class="row g-4 g-lg-5">
+        <div class="col-lg-7">
+          <figure class="room-detail__main" appClipReveal>
+            <img
+              *ngIf="activeImage as img"
+              class="room-detail__main-img"
+              [src]="img.src"
+              [alt]="img.alt"
+            />
+          </figure>
+          <div class="room-detail__thumbs" role="group" aria-label="Room photos">
+            <button
+              type="button"
+              class="room-detail__thumb"
+              *ngFor="let image of r.images; let i = index"
+              [class.room-detail__thumb--active]="image === activeImage"
+              (click)="selectImage(image)"
+              [attr.aria-label]="'Show photo ' + (i + 1) + ' of ' + r.images.length"
+              [attr.aria-pressed]="image === activeImage"
+            >
+              <img [src]="image.src" [alt]="image.alt" loading="lazy" />
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <aside
+            class="surface-card room-detail__summary"
+            appReveal
+            revealChildren=":scope > *"
+            [revealStagger]="0.08"
+            aria-label="Room summary"
+          >
+            <span class="eyebrow">{{ r.type }}</span>
+            <h2>{{ r.name }}</h2>
+            <p class="text-muted-soft">{{ r.longDescription }}</p>
+
+            <ul class="room-detail__features" aria-label="Room features">
+              <li class="tag" *ngFor="let feature of r.features">{{ feature }}</li>
+              <li class="tag">Sleeps {{ r.maxGuests }}</li>
+            </ul>
+
+            <div class="room-detail__price">
+              <strong>${{ r.pricePerNight }}</strong>
+              <span class="text-muted-soft">/ night</span>
+            </div>
+
+            <a
+              class="btn-resort btn-resort--primary room-detail__book"
+              appMagnetic
+              [routerLink]="['/booking']"
+              [queryParams]="{ room: r.id }"
+              >Book This Room</a
+            >
+            <p class="room-detail__note text-muted-soft">
+              Free cancellation up to 48 hours before check-in. No charge until
+              our team confirms availability.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>

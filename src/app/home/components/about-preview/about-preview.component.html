@@ -8,9 +8,11 @@
           width="1600"
           height="1067"
           class="about-preview__image"
+          appClipReveal
+          [appParallax]="5"
         />
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6" appReveal revealChildren="app-section-header, .feature-list li, .btn-resort" [revealStagger]="0.1">
         <app-section-header
           align="left"
           eyebrow="Welcome to Wayanad Resorts"
