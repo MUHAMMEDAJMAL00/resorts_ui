@@ -6,7 +6,13 @@
     </a>
 
     <ul class="nav-links" id="primary-menu" [class.nav-links--open]="isMenuOpen">
-      <li *ngFor="let link of navLinks">
+      <li class="nav-links__header">
+        <a routerLink="/" class="brand-drawer" (click)="closeMenu()">
+          <i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i>
+          <span>Wayanad Resorts</span>
+        </a>
+      </li>
+      <li *ngFor="let link of navLinks" class="nav-links__item">
         <a
           [routerLink]="link.path"
           routerLinkActive="active"
@@ -16,7 +22,14 @@
         >
       </li>
       <li class="nav-links__cta">
-        <a routerLink="/booking" class="btn-resort btn-resort--primary" (click)="closeMenu()">Book Now</a>
+        <a routerLink="/booking" class="btn-resort btn-resort--primary" (click)="closeMenu()">
+          <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+          Book Now
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="nav-links__footer">
+        <small>&copy; 2026 &middot; <span>Wayanad Resorts</span></small>
       </li>
     </ul>
 

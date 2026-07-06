@@ -31,14 +31,12 @@
 /* Slow continuous Ken Burns zoom on the visible slide */
 @media (prefers-reduced-motion: no-preference) {
   .hero__slide--active img {
-    animation: hero-kenburns 18s ease-out forwards;
+    animation-name: hero-kenburns;
+    animation-duration: 18s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
     will-change: transform;
   }
-}
-
-@keyframes hero-kenburns {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
 }
 
 /* Dark overlay for text contrast — warm-tinted so golden-hour slides keep their glow */

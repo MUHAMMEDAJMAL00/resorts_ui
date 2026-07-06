@@ -246,6 +246,12 @@ img { max-width: 100%; }
   background-size: 100% 1px;
 }
 
+/* ============ Hero slider Ken Burns zoom ============ */
+@keyframes hero-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
 /* Respect users who prefer no motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

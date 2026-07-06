@@ -15,7 +15,6 @@
     opacity var(--transition);
 }
 
-/* Glassmorphism — this is the one place it is used (plus the hero panel) */
 .site-header--solid {
   background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(12px);
@@ -63,7 +62,6 @@
   padding: 6px 2px;
 }
 
-/* Underline grows from the left on hover; stays full-width when active */
 .nav-links a:not(.btn-resort)::after {
   content: '';
   position: absolute;
@@ -82,7 +80,6 @@
   transform: scaleX(1);
 }
 
-/* Solid header: switch text to navy */
 .site-header--solid .brand,
 .site-header--solid .nav-links a:not(.btn-resort) {
   color: var(--color-navy);
@@ -111,18 +108,13 @@
   color: var(--color-navy);
 }
 
-.menu-backdrop {
+body:has(.nav-links--open) {
+  overflow: hidden;
   position: fixed;
-  inset: 0;
-  z-index: 900;
-  background: rgba(11, 37, 69, 0.5);
+  width: 100%;
 }
 
-/* ============ Mobile: slide-in panel ============ */
-/* ============ Page-load intro: logo scales in, nav items drop in ============ */
 @media (prefers-reduced-motion: no-preference) {
-  /* "backwards" (not "both") so the finished animation releases the
-     transform — the magnetic hover sets inline transforms afterwards. */
   .brand {
     animation: header-brand-in 0.7s cubic-bezier(0.33, 1, 0.68, 1) 0.1s backwards;
   }
@@ -145,37 +137,42 @@
 }
 
 @keyframes header-brand-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes header-item-in {
-  from {
-    opacity: 0;
-    transform: translateY(-14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes nav-item-slide-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gold-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.menu-backdrop {
+  animation: backdrop-in 250ms ease;
+  background: rgba(11, 37, 69, 0.65);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 
 @media (max-width: 991px) {
-  /* The intro underline/drop-in styles above are desktop-only; keep the
-     drawer links plain so the slide-in panel stays clean. */
   .nav-links a:not(.btn-resort)::after {
     display: none;
   }
 
-  /* backdrop-filter makes the header the containing block for fixed
-     descendants, which breaks the drawer — use a plain solid header
-     on mobile instead of glass. */
   .site-header--solid {
     background: var(--color-white);
     -webkit-backdrop-filter: none;
@@ -196,9 +193,32 @@
 
   .menu-toggle {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin-left: auto;
     position: relative;
     z-index: 1002;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    transition: background var(--transition), transform 400ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .site-header--solid .menu-toggle {
+    background: rgba(11, 37, 69, 0.08);
+  }
+
+  .menu-toggle i {
+    transition: transform 400ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .nav-links--open ~ .menu-toggle i {
+    transform: rotate(180deg) scale(1.1);
+  }
+
+  .menu-toggle:active {
+    transform: scale(0.88);
   }
 
   .nav-links {
@@ -210,18 +230,24 @@
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    width: min(320px, 85vw);
+    width: min(340px, 88vw);
     margin: 0;
-    padding: 88px 28px 32px;
-    background: var(--color-white);
-    box-shadow: var(--shadow-lg);
+    padding: 0;
+    background: rgba(255, 255, 255, 0.92);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    box-shadow: -8px 0 40px rgba(11, 37, 69, 0.15), -2px 0 12px rgba(11, 37, 69, 0.06);
     overflow-y: auto;
-    /* Single fade + slide transition */
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    border-radius: 0;
     transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
-    transition: transform var(--transition), opacity var(--transition), visibility var(--transition);
+    transition: transform 350ms cubic-bezier(0.33, 1, 0.68, 1), opacity 300ms ease, visibility 300ms ease;
   }
+
+  .nav-links::-webkit-scrollbar { display: none; }
 
   .nav-links--open {
     transform: translateX(0);
@@ -229,38 +255,173 @@
     visibility: visible;
   }
 
-  .nav-links li:not(.nav-links__cta) {
-    border-bottom: 1px solid var(--color-beige);
+  .nav-links::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-gold-deep), var(--color-gold));
+    background-size: 200% 100%;
+    animation: gold-shimmer 3s ease-in-out infinite;
+  }
+
+  .nav-links__header {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(201, 162, 75, 0.15);
+    margin-bottom: 4px;
+  }
+
+  .nav-links__header .brand-drawer {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-navy);
+    text-decoration: none;
+  }
+
+  .nav-links__header .brand-drawer i {
+    color: var(--color-gold);
+    font-size: 18px;
+  }
+
+  .nav-links--open .nav-links__item {
+    animation: nav-item-slide-up 0.5s cubic-bezier(0.33, 1, 0.68, 1) backwards;
+  }
+
+  .nav-links--open .nav-links__item:nth-child(1) { animation-delay: 0.05s; }
+  .nav-links--open .nav-links__item:nth-child(2) { animation-delay: 0.10s; }
+  .nav-links--open .nav-links__item:nth-child(3) { animation-delay: 0.15s; }
+  .nav-links--open .nav-links__item:nth-child(4) { animation-delay: 0.20s; }
+  .nav-links--open .nav-links__item:nth-child(5) { animation-delay: 0.25s; }
+  .nav-links--open .nav-links__item:nth-child(6) { animation-delay: 0.30s; }
+  .nav-links--open .nav-links__item:nth-child(7) { animation-delay: 0.35s; }
+
+  .nav-links__item {
+    border-bottom: 1px solid rgba(201, 162, 75, 0.1);
+    margin: 0 20px;
+  }
+
+  .nav-links a.brand-drawer {
+    padding: 0;
+    border-radius: 0;
   }
 
   .nav-links a:not(.btn-resort) {
     color: var(--color-navy);
-    font-size: 17px;
-    display: block;
-    padding: 14px 4px;
-    border-bottom: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 14px 4px 14px 20px;
+    position: relative;
+    font-weight: 450;
+    letter-spacing: 0.3px;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    transition: color 300ms ease, background 300ms ease, padding 300ms ease;
+  }
+
+  .nav-links a:not(.btn-resort)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--color-gold), var(--color-gold-deep));
+    border-radius: 0 3px 3px 0;
+    transform: scaleY(0);
+    box-shadow: 0 0 8px rgba(201, 162, 75, 0.3);
+    transition: transform 300ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .nav-links a:not(.btn-resort):hover {
+    background: linear-gradient(90deg, rgba(201, 162, 75, 0.08), transparent);
+    padding-left: 24px;
+    color: var(--color-gold-deep);
+  }
+
+  .nav-links a:not(.btn-resort):hover::before,
+  .nav-links a.active:not(.btn-resort)::before {
+    transform: scaleY(1);
   }
 
   .nav-links a.active:not(.btn-resort) {
     color: var(--color-gold-deep);
     font-weight: 600;
+    background: linear-gradient(90deg, rgba(201, 162, 75, 0.08), transparent);
+  }
+
+  .nav-links a:not(.btn-resort)::after {
+    content: '\f054' !important;
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 5 Free', 'FontAwesome';
+    font-weight: 900;
+    position: static;
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--color-gold);
+    opacity: 0;
+    transform: translateX(-4px);
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 300ms ease, transform 300ms cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  .nav-links a:not(.btn-resort):hover::after,
+  .nav-links a.active:not(.btn-resort)::after {
+    opacity: 0.7;
+    transform: translateX(0);
   }
 
   .nav-links__cta {
     display: block;
-    margin-top: 24px;
+    margin: 20px 20px 0;
   }
 
   .nav-links__cta .btn-resort {
     width: 100%;
+    justify-content: center;
+    padding: 14px 28px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
   }
-}
 
-@keyframes backdrop-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+  .nav-links__cta .btn-resort::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
 
-.menu-backdrop {
-  animation: backdrop-in var(--transition);
+  .nav-links__cta .btn-resort:hover::before { opacity: 1; }
+
+  .nav-links__cta .btn-resort i {
+    font-size: 14px;
+    transition: transform var(--transition);
+  }
+
+  .nav-links__cta .btn-resort:hover i { transform: translateX(3px); }
+
+  .nav-links__footer {
+    margin-top: auto;
+    padding: 24px 24px 32px;
+    text-align: center;
+  }
+
+  .nav-links__footer small {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .nav-links__footer small span { color: var(--color-gold); }
 }
